@@ -59,21 +59,21 @@ TreeMap * createTreeMap(int (*lower_than) (void* key1, void* key2)) {
 
 Pair * searchTreeMap(TreeMap * tree, void* key) {
     if (tree == NULL || tree->root == NULL) return NULL;
-        TreeNode * aux = tree->root;
-        while (aux != NULL) {
-            if (tree->lower_than(key, aux->pair->key) == 0 && tree->lower_than(aux->pair->key, key) == 0) {
-                tree->current = aux; 
-                return aux->pair;
-            }
-            if (tree->lower_than(key, aux->pair->key) == 1) {
-                aux = aux->left;
-            } 
-            else {
-                aux = aux->right;
-            }
+    TreeNode * aux = tree->root;
+    while (aux != NULL) {
+        if (tree->lower_than(key, aux->pair->key) == 0 && tree->lower_than(aux->pair->key, key) == 0) {
+            tree->current = aux; 
+            return aux->pair;
         }
-        return NULL;
+        if (tree->lower_than(key, aux->pair->key) == 1) {
+            aux = aux->left;
+        } 
+        else {
+            aux = aux->right;
+        }
     }
+    return NULL;
+}
 
 // 3. Implemente la función void insertTreeMap(TreeMap * tree, void* key, void * value). 
 // Esta función inserta un nuevo dato (key,value) en el árbol y hace que el current apunte al nuevo nodo. 
